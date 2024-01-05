@@ -1,0 +1,6 @@
+.corousel-item img{
+    object-fit: cover;
+    object-position: top;
+    height: 30vh;
+    overflow: hidden;
+}
