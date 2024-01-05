@@ -1,0 +1,44 @@
+{% extends 'shop/layouts/main.html' %}
+{% block title %}
+    Register | ShopKart
+{%endblock title %}
+
+{% block content %}
+<section class="py-5 text-center container" style="margin-top: 70px;">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Best Sellers</h1>
+            <p class="lead text-muted">Our most popular based on sales. Uploaded hourly</p>
+            <p>
+                <a href="#" class="btn btn-primary my-2">Already Register</a>
+                <a href="#" class="btn btn-secondary my-2">Register</a>
+            </p>
+        </div>
+    </div>
+</section>
+<section class="bg-light py-4 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">Catagories</h4>
+                <hr style="border-color:#b8bfc2">
+            </div>
+
+            {% for item in catagory %}
+            <div class="col-md-4 col-lg-3">
+                <div class="card my-3">
+                    {% if item.image %}
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="Categories">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">{{ item.name }}</h5>
+                        <p class="card-text">HTML stands for Hyper Text Markup Language</p>
+                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}
