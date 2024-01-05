@@ -32,4 +32,29 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+class LabourAttendance(models.Model):
+    SUBCONTRACTOR = 'F&F'
+    MUSTER_ROLE = 'MR'
+    EMPTY = ''
+
+    ATTENDANCE_TYPE_CHOICES = [
+        (EMPTY, ''),
+        (SUBCONTRACTOR, 'Subcontractor'),
+        (MUSTER_ROLE, 'Muster Role'),
+    ]
+
+    name = models.CharField(max_length=150, null=False, blank=False)
+    attendance_type = models.CharField(
+        max_length=3,
+        choices=ATTENDANCE_TYPE_CHOICES,
+        default=EMPTY,
+    )
+    posting_date = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.name
+
+
 
