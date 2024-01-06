@@ -30,11 +30,12 @@
                     {% if item.image %}
                     <img src="{{ item.image.url }}" class="card-img-top" alt="Categories">
                     {% endif %}
+                    <a href="{% url 'collections' item.name %}">
                     <div class="card-body">
                         <h5 class="card-title text-primary">{{ item.name }}</h5>
-                        <p class="card-text">HTML stands for Hyper Text Markup Language</p>
-                        <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                        <p class="card-text">{{ item.description }}</p>
                     </div>
+                    </a>
                 </div>
             </div>
             {% endfor %}
