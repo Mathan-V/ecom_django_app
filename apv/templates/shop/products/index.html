@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h4 class="mb-3">Awesome Products</h4>
+                <h4 class="mb-3">{{catagory_name}}</h4>
                 <hr style="border-color: #b8bfc8 ;">
             </div>
             {% for item in products %}
@@ -16,12 +16,12 @@
                     {% if item.product_image %}
                     <img src="{{ item.product_image.url }}" class="card-img-top" alt="Categories">
                     {% endif %}
-                    <a href="#">
+                    <a href="{% url 'product_details' catagory_name item.name %}">
                     <div class="card-body">
                         <h5 class="card-title text-primary">{{ item.name }}</h5>
                         <p class="card-text">
-                            <span class="float-start"><s>RS.{{item.original_price | stringformat:'d'}}</s></span>
-                            <span class="float-end">RS.{{item.selling_price | stringformat:'d'}}</span>
+                            <span class="float-start old_price"><s>RS.{{item.original_price | stringformat:'d'}}</s></span>
+                            <span class="float-end new_price">RS.{{item.selling_price | stringformat:'d'}}</span>
                         </p>
                     </div>
                     </a>

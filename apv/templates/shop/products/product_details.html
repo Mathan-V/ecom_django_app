@@ -1,0 +1,42 @@
+{% extends 'shop/layouts/main.html' %}
+{% block title %}
+    Shopkart | Online Shopping
+{%endblock title %}
+{% block content %}
+<section class="bg-light py-4 my-5" style="min-height: 600px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">{{products}} Details</h4>
+                <hr style="border-color: #b8bfc8 ;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'collections' products.catagory.name %}">Collections</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{products}}</li>
+                    </ol>
+                  </nav>
+            </div>
+            <div class="col-4 my-3">
+                <img src="{{ products.product_image.url }}" class="card-img-top" alt="{{products}}">
+            </div>
+            <div class="col-8 my-3">
+                <h5 class="text-sucess">
+                    {{products | upper}}
+                </h5>
+                <p>
+                    {{products.vendor}}
+                </p>
+                <p>
+                    {{products.description}}
+                </p>
+                <h6 class="my-2 text-danger">Current Price : Rs.<s>{{products.original_price}}</s></h6>
+                <h5 class="my-2 text-primary">Offer Price : {{products.selling_price}}</h5>
+                <button class="btn btn-primary"><i class="fa fa-cart"></i>Add to Cart</button>
+                <button class="btn btn-danger"><i class="fa fa-heart"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+   
+{% endblock content %}
