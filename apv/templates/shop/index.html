@@ -1,14 +1,46 @@
 {% extends 'shop/layouts/main.html' %}
 {% block title %}
     Shopkart | Online Shopping
-{%endblock title %}
+{% endblock title %}
 {% block content %}
-{% include 'shop/inc/slider.html' %}
+    {% include 'shop/inc/slider.html' %}
+    <style>
+        .product-card {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            margin-bottom: 20px; 
+            height: 100%;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+        .card-text {
+            flex: 1;
+        }
+        .card-img, .card-img-bottom, .card-img-top {
+            width: 70%;
+        }
+    </style>
     <div class="container" style="margin-top: 70px;">
-        <div class="row">
-            <div class="col-12">
-                <h1>Mathan!</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for item in products %}
+            <div class="col">
+                <div class="card product-card">
+                    <img src="{{ item.product_image.url }}" class="card-img-top" alt="Categories">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">{{ item.name }}</h5>
+                        <p class="card-text">
+                            <span class="float-start old_price"><s>RS.{{item.original_price | stringformat:'d'}}</s></span>
+                            <span class="float-end new_price">RS.{{item.selling_price | stringformat:'d'}}</span>
+                        </p>
+                        <div class="mt-auto">
+                            <a href="{% url 'product_details' item.catagory.name item.name %}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock content %}
