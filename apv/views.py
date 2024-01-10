@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from apv.form import CustomUserForm
 from . models import *
 from django.contrib import messages
 from django.http import HttpResponse 
@@ -7,8 +8,20 @@ from django.http import HttpResponse
 def home(request):
     products = Product.objects.filter(trending=1)
     return render(request,"shop/index.html",{"products":products})
+
+def login(request):
+    return render(request,"shop/login.html")
+
 def register(request):
-    return render(request,"shop/register.html")
+    form = CustomUserForm()
+    if request.method == 'POST':
+        form = CustomUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Registration Success You can Login Now..!")
+            return redirect('/login')
+    return render(request,"shop/register.html",{"form":form})
+
 def collections(request):
     catagory = Catagory.objects.filter(status=0)
     return render(request,"shop/collections.html",{"catagory":catagory})
