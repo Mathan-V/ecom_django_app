@@ -21,29 +21,29 @@
                         <div class="mb-4">
                             <label for="" class="form-label">User Name</label>
                             <h3>{{form.username}} </h3>
-                            {% if form.error.username %}
-                            <label class="text-danger">{{form.error.username}}</label>
+                            {% if form.errors.username %}
+                            <label class="text-danger">{{form.errors.username}}</label>
                             {% endif %}
                         </div>
                         <div class="mb-4">
                             <label for="" class="form-label">Email</label>
                             <h3>{{form.email}} </h3>
-                            {% if form.error.email %}
-                            <label class="text-danger">{{form.error.email}}</label>
+                            {% if form.errors.email %}
+                            <label class="text-danger">{{form.errors.email}}</label>
                             {% endif %}
                         </div>
                         <div class="mb-4">
                             <label for="" class="form-label">Password</label>
                             <h3>{{form.password1}}</h3>
-                            {% if form.error.password1 %}
-                            <label class="text-danger">{{form.error.password1}}</label>
+                            {% if form.errors.password1 %}
+                            <label class="text-danger">{{form.errors.password1}}</label>
                             {% endif %}
                         </div>
                         <div class="mb-4">
                             <label for="" class="form-label"> Conform password</label>
                             <h3>{{form.password2}}</h3>
-                            {% if form.error.password2 %}
-                            <label class="text-danger">{{form.error.password2}}</label>
+                            {% if form.errors.password2 %}
+                            <label class="text-danger">{{form.errors.password2}}</label>
                             {% endif %}
                         </div>
                         <button type="submit" class="btn btn-primary">Register</button>
