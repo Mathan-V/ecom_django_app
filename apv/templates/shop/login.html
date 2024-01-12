@@ -9,9 +9,29 @@
         <div class="col-12">
             <h4 class="mb-3">User Login</h1>
             <hr style="border-color:#b8bfc2;">
-            
+            {% include 'shop/inc/message.html' %}
         </div>
     </div>
+    <section class="py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="" class="form-label">User Name</label>
+                            <input type="text" name="username" id="username" class="form-control" placeholder="password">
+                        </div>
+                        <div class="mb-4">
+                            <label for="" class="form-label">Password</label>
+                            <input type="password" name="password" id="password" class="form-control" placeholder="password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
     
 </div>
 {% endblock content %}

@@ -7,8 +7,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h4 class="mb-3">{{catagory_name}}</h4>
+                <h4 class="mb-3">{{catagory_name}} Products</h4>
                 <hr style="border-color: #b8bfc8 ;">
+                {% include 'shop/inc/message.html' %}
             </div>
             {% for item in products %}
             <div class="col-md-4 col-lg-3">

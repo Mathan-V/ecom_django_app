@@ -7,9 +7,9 @@
 <div class="container" style="margin-top: 70px;">
     <div class="row">
         <div class="col-12">
-            <h4 class="mb-3">Register Form</h1>
+            <h4 class="mb-3">New User Registration</h1>
             <hr style="border-color:#b8bfc2;">
-            
+            {% include 'shop/inc/message.html' %}
         </div>
     </div>
     <section class="py-4 my-5">
@@ -21,34 +21,39 @@
                         <div class="mb-4">
                             <label for="" class="form-label">User Name</label>
                             <h3>{{form.username}} </h3>
-                            {% if form.errors.username %}
-                            <label class="text-danger">{{form.errors.username}}</label>
-                            {% endif %}
                         </div>
                         <div class="mb-4">
                             <label for="" class="form-label">Email</label>
                             <h3>{{form.email}} </h3>
-                            {% if form.errors.email %}
-                            <label class="text-danger">{{form.errors.email}}</label>
-                            {% endif %}
                         </div>
                         <div class="mb-4">
                             <label for="" class="form-label">Password</label>
                             <h3>{{form.password1}}</h3>
-                            {% if form.errors.password1 %}
-                            <label class="text-danger">{{form.errors.password1}}</label>
-                            {% endif %}
                         </div>
                         <div class="mb-4">
                             <label for="" class="form-label"> Conform password</label>
                             <h3>{{form.password2}}</h3>
-                            {% if form.errors.password2 %}
-                            <label class="text-danger">{{form.errors.password2}}</label>
-                            {% endif %}
                         </div>
                         <button type="submit" class="btn btn-primary">Register</button>
                     </form>
-                    <p class="my-2">Already User ? <a href="#">Login Now</a></p>
+                    <p class="my-2">Already User ? <a href="{% url 'login' %}">Login Now</a></p>
+                </div>
+
+
+                <div class="col-6">
+                    {% if form.errors.username %}
+                    <label class="text-danger d-block">{{form.errors.username}}</label>
+                    {% endif %}
+                    {% if form.errors.email %}
+                    <label class="text-danger d-block">{{form.errors.email}}</label>
+                    {% endif %}
+                    {% if form.errors.password1 %}
+                    <label class="text-danger d-block">{{form.errors.password1}}</label>
+                    {% endif %}   
+                    {% if form.errors.password2 %}
+                    <label class="text-danger d-block">{{form.errors.password2}}</label>
+                    {% endif %}
+                
                 </div>
             </div>
         </div>
