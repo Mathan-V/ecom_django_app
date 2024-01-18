@@ -18,6 +18,8 @@ def logout_page(request):
     return redirect("/")
 
 def login_page(request):
+    if request.user.is_authenticated:
+        return redirect("/")
     if request.method == 'POST':
         name = request.POST.get('username')
         pwd = request.POST.get('password')
