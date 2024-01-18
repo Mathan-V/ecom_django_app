@@ -37,6 +37,13 @@
                 <h6 class="my-2 text-danger">Current Price : Rs.<s>{{products.original_price}}</s></h6>
                 <h5 class="my-2 text-primary">Offer Price : {{products.selling_price}}</h5>
                 {% if products.quantity >  0 %}
+                <p>
+                    <div class="input-group" style="width: 150px;">
+                    <button class="input-group-text bg-success text-light" id="btnMinus"><i class="fa fa-minus"></i></button>
+                    <input type="text" name="qty" id="txtQty" value="1" class="form-control text-center">
+                    <button class="input-group-text bg-success text-light" id="btnPlus"><i class="fa fa-plus"></i></button>
+                    </div>
+                </p>
                 <button class="btn btn-primary"><i class="fa fa-shopping-cart">&nbsp;</i>Add to Cart</button>
                 {% else %}
                 <button class="btn btn-secondary"><i class="fa fa-minus"></i>Out of Stock </button>
@@ -46,5 +53,31 @@
         </div>
     </div>
 </section>
+<script>
+document.addEventListener("DOMContentLoaded",function(event){
+    const btnPlus = document.getElementById("btnPlus")
+    const btnMinus = document.getElementById("btnMinus")
+    const txtQty = document.getElementById("txtQty")
+
+    btnPlus.addEventListener("click",function(){
+        let qty = parseInt(txtQty.value,10)
+        qty=isNaN(qty)?0:qty
+        console.log(qty)
+        if (qty<10){
+            qty++;
+            txtQty.value=qty
+        }
+    })
+    btnMinus.addEventListener("click",function(){
+        let qty = parseInt(txtQty.value,10)
+        qty=isNaN(qty)?0:qty
+        if (qty > 1){
+            qty--;
+            txtQty.value=qty
+        }
+    })
+
+})
+</script>
    
 {% endblock content %}

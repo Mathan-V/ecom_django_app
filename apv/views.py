@@ -20,18 +20,19 @@ def logout_page(request):
 def login_page(request):
     if request.user.is_authenticated:
         return redirect("/")
-    if request.method == 'POST':
-        name = request.POST.get('username')
-        pwd = request.POST.get('password')
-        user = authenticate(request,username=name,password=pwd)
-        if user is not None:
-            login(request,user)
-            messages.success(request,"Login Successfully")
-            return redirect("/")
-        else:
-            messages.error(request,"Invalid User Name or Password")
-            return redirect("/login")
-    return render(request,"shop/login.html")
+    else:
+        if request.method == 'POST':
+            name = request.POST.get('username')
+            pwd = request.POST.get('password')
+            user = authenticate(request,username=name,password=pwd)
+            if user is not None:
+                login(request,user)
+                messages.success(request,"Login Successfully")
+                return redirect("/")
+            else:
+                messages.error(request,"Invalid User Name or Password")
+                return redirect("/login")
+        return render(request,"shop/login.html")
 
 def register(request):
     form = CustomUserForm()
