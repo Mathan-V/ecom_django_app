@@ -4,12 +4,26 @@ from . models import *
 from django.contrib import messages
 from django.http import HttpResponse 
 from django.contrib.auth import authenticate,login,logout
+from django.http import *
+import json
 
 # Create your views here.
 def home(request):
     products = Product.objects.filter(trending=1)
     return render(request,"shop/index.html",{"products":products})
 
+
+def add_to_cart(request):
+    if request.headers.get('x-request-with') == 'XMLHttpRequest':
+        if request.user.is_authenticated:
+            data =json.load(request)
+            print(data['product_qty'])
+            print(data['pid'])
+            print(request.user.id)
+        else:
+            return JsonResponse({'status':'Login to Add Cart'},status =200)
+    else:
+        return JsonResponse({'status':'Invalid Access'},status=200)
 
 def logout_page(request):
     if request.user.is_authenticated:

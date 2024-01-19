@@ -37,6 +37,8 @@
                 <h6 class="my-2 text-danger">Current Price : Rs.<s>{{products.original_price}}</s></h6>
                 <h5 class="my-2 text-primary">Offer Price : {{products.selling_price}}</h5>
                 {% if products.quantity >  0 %}
+                {% csrf_token %}
+                <input type="hidden" value="{{ product.id }}" id="pid">
                 <p>
                     <div class="input-group" style="width: 150px;">
                     <button class="input-group-text bg-success text-light" id="btnMinus"><i class="fa fa-minus"></i></button>
@@ -44,7 +46,7 @@
                     <button class="input-group-text bg-success text-light" id="btnPlus"><i class="fa fa-plus"></i></button>
                     </div>
                 </p>
-                <button class="btn btn-primary"><i class="fa fa-shopping-cart">&nbsp;</i>Add to Cart</button>
+                <button class="btn btn-primary" id="btnCart"><i class="fa fa-shopping-cart">&nbsp;</i>Add to Cart</button>
                 {% else %}
                 <button class="btn btn-secondary"><i class="fa fa-minus"></i>Out of Stock </button>
                 {% endif %}
@@ -58,6 +60,10 @@ document.addEventListener("DOMContentLoaded",function(event){
     const btnPlus = document.getElementById("btnPlus")
     const btnMinus = document.getElementById("btnMinus")
     const txtQty = document.getElementById("txtQty")
+    const pid = document.getElementById("pid")
+    const tkn = document.querySelector('[name = "csrfmiddlewaretoken"]').value
+    const btnCart = document.getElementById("btnCart")
+
 
     btnPlus.addEventListener("click",function(){
         let qty = parseInt(txtQty.value,10)
@@ -75,6 +81,38 @@ document.addEventListener("DOMContentLoaded",function(event){
             qty--;
             txtQty.value=qty
         }
+    })
+
+    btnCart.addEventListener("click",function(){
+        let qty = parseInt(txtQty.value,10)
+        qty=isNaN(qty)?0:qty
+        if (qty >0){
+            let postObj = {
+                product_qty:qty,
+                pid:pid.value,
+                token:tkn
+            }
+            console.log(postObj)
+            fetch("/addtocart",{
+                method:'POST',
+                credentials:'same-origin',
+                headers:{
+                    'Accept':'application/json',
+                    'X-Requested-With':'XMLHttpRequest',
+                    'X-CSRFToken':'{{ csrf_token }}',
+
+                },
+                body:JSON.stringify(postObj)
+            }).then(r =>{
+                return r.json();
+            }).then(data => {
+                console.log(data)
+            })
+
+        }else{
+            alert("Please Enter The Quantity")
+        }
+
     })
 
 })
