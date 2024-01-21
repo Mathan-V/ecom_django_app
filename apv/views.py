@@ -14,12 +14,23 @@ def home(request):
 
 
 def add_to_cart(request):
-    if request.headers.get('x-request-with') == 'XMLHttpRequest':
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
         if request.user.is_authenticated:
             data =json.load(request)
-            print(data['product_qty'])
-            print(data['pid'])
-            print(request.user.id)
+            product_qty = data['product_qty']
+            product_id = data['pid']
+            #request.user.id
+            product_status = Product.objects.get(id=product_id)
+            if Cart.objects.filter(user=request.user.id,product_id=product_id):
+                return JsonResponse({'status':'Product Alfready in Cart'},status=200)
+            else:
+                if product_status.quantity>=product_qty:
+                    Cart.objects.create(user=request.user.id,product_id=product_id,product_qty=product_qty)
+                    return JsonResponse({'status':'Product Added to Cart'},status=200)
+                else:
+                    return JsonResponse({'status':'Stock Not Available'},status=200)
+
+            return JsonResponse({'status':'Product Added to Cart Success'},status=200)
         else:
             return JsonResponse({'status':'Login to Add Cart'},status =200)
     else:
